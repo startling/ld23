@@ -135,11 +135,5 @@ function Stage (literal) {
 
 
 var first = Stage({
-    players: [Character({
-        name: "you", image: "resources/player.png",
-        x: 1, y: 1,
-    }), Character({
-        name: "me", image: "resources/player.png",
-        x: 3, y: 3,
-    })]
+    players: [player.at(5, 2), player.at(2, 2)],
 });

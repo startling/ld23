@@ -18,6 +18,13 @@ var _base_character = {
     x: null, y: null,
     // the distance this thing can move in one turn.
     speed: 3,
+
+    at: function (x, y) {
+        var n = Object.create(this);
+        n.x = x;
+        n.y = y;
+        return n;
+    },
 }
 
 
@@ -35,3 +42,8 @@ function Character (literal) {
     // and return it.
     return character
 };
+
+
+var player = Character({
+    name: "you", image: "resources/player.png",
+})
