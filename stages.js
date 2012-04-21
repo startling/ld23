@@ -108,6 +108,12 @@ var _base_stage = {
         // return an array of everything in here.
         return this.players.concat(this.obstacles).concat(this.npcs);
     },
+
+    move: function(character, x, y, context) {
+        //TODO: smooth animation/pathfinding
+        character.x = x;
+        character.y = y;
+    },
 };
 
 

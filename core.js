@@ -67,8 +67,7 @@ function highlight_movements (player, stage, canvas, context) {
         // if the click is in the range, move there.
         for (var index = 0; index < in_range.length; index ++) {
             if (in_range[index].x == x && in_range[index].y == y) {
-                player.x = x;
-                player.y = y;
+                stage.move(player, x, y, context);
                 break;
             };
         }; 
