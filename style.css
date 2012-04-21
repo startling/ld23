@@ -3,38 +3,32 @@
     margin-left: auto;
     margin-right: auto;
     
+    /* center the canvas. */
+    text-align: center;
+    
+    /* 25 tiles wide. */
+    width: 500px;
+}
+
+.container {
+    /* 25 tiles high, with an extra 20px row. */
+    min-height: 520px;
+
+    background-color: #fff;
+}
+
+canvas {
+    background-color: #fff;
     border: 1px solid #000000;
 
     /* nice shadow outlines */
     box-shadow: 0 0 3px #000;
     -moz-box-shadow: 0 0 3px #000;
     -webkit-box-shadow: 0 0 3px #000;
-
-    /* nice box-sizing */
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-
-    /* center the canvas. */
-    text-align: center;
-    
-    /* 25 tiles wide. */
-    width: 500px;   
-}
-
-.container {
-    /* 25 tiles high, with an extra 20px row. */
-    height: 520px;
-    background-color: #fff;
-}
-
-canvas {
-    padding: 0;
-    margin: 0;
-    background-color: #fff;
 }
 
 .error {
+    border: 1px solid 
     cursor: pointer;
     padding: 5px 10px;
     font: 1em Georgia;
