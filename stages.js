@@ -22,6 +22,9 @@ function Row (arr) {
 
 // the base stage object every other stage inherits rows from.
 var _base_stage = {
+    // an (uninitialized) list of the player characters...
+    players: null,
+
     draw_tiles: function (context) {
         // draw this stage to a canvas' 2d context
         for (var row = 0; row < page_height - 1; row++) {
@@ -48,9 +51,9 @@ for (var num=0; num < 25; num++) {
 };
 
 
-function Stage () {
+function Stage (literal) {
     // create a stage with clones of each row of the base stage.
-    var stage = Object.create(_base_stage);
+    var stage = Object.create(_base_stage, literal);
     for (var num = 0; num < 25; num++){
         stage[num] = Object.create(_base_stage[num]);
     };
