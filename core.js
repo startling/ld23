@@ -53,16 +53,7 @@ function turn(stage, canvas, context) {
 function highlight_movements (player, stage, canvas, context) {
     // determine all fo the tile coordinates (from the player's position) that
     // are in-range.
-    // TODO: ignore blocked paths.
-    var in_range = [];
-    for (var x = -player.speed; x <= player.speed; x++) {
-        for (var y =-player.speed; y <= player.speed; y++) {
-            // ignore the ones that are too far away.
-            if (Math.abs(x) + Math.abs(y) <= player.speed) {
-                in_range.push({x: x + player.x, y: y + player.y});
-            };
-        };
-    };
+    var in_range = stage.possible(player);
 
     // highlight each of those tiles
     in_range.forEach(function (tile) {
@@ -89,12 +80,3 @@ function highlight_movements (player, stage, canvas, context) {
     });
     canvas.addEventListener("click", move, false);
 };
-
-
-
-
-
-
-
-
-
