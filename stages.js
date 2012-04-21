@@ -143,4 +143,5 @@ function Stage (literal) {
 
 var first = Stage({
     players: [player.at(0, 2), player.at(2, 2)],
+    obstacles: [block.at(1, 1), block.at(1, 2), block.at(1, 3)],
 });
