@@ -24,6 +24,8 @@ function Row (arr) {
 var _base_stage = {
     // an (uninitialized) list of the player characters...
     players: null,
+    // an (unitialized) list of obstacles
+    obstacles: [],
 
     draw_tiles: function (context) {
         // draw this stage to a canvas' 2d context
@@ -38,7 +40,7 @@ var _base_stage = {
 
     draw_characters: function (context) {
         // draw each player character (more later)
-        this.players.forEach(function (character) {
+        this.contains().forEach(function (character) {
             var x = character.x * tile_size;
             var y = character.y * tile_size;
             context.drawImage(character.image, x, y);
@@ -48,14 +50,14 @@ var _base_stage = {
     open: function (x, y) {
         // return true if a space isn't filled, false otherwise
         // check if there are any player characters here.
-        for (var index = 0; index < this.players.length; index++) {
-            var character = this.players[index];
+        var everything = this.contains();
+        for (var index = 0; index < everything.length; index++) {
+            var character = everything[index];
             if (character.x == x && character.y == y) {
                 return false;
             };
         };
-        // TODO: check for npcs, obstacles
-        return true
+        return true;
     },
     
     in_bounds: function(x, y) {
@@ -99,6 +101,11 @@ var _base_stage = {
         };
         return ps;
     },
+
+    contains: function () {
+        // return an array of everything in here.
+        return this.players.concat(this.obstacles);
+    },
 };
 
 
@@ -135,5 +142,5 @@ function Stage (literal) {
 
 
 var first = Stage({
-    players: [player.at(5, 2), player.at(2, 2)],
+    players: [player.at(0, 2), player.at(2, 2)],
 });
