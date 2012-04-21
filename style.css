@@ -1,0 +1,40 @@
+.container, .error {
+    display: box;
+    margin-left: auto;
+    margin-right: auto;
+    
+    border: 1px solid #000000;
+
+    /* nice shadow outlines */
+    box-shadow: 0 0 3px #000;
+    -moz-box-shadow: 0 0 3px #000;
+    -webkit-box-shadow: 0 0 3px #000;
+
+    /* nice box-sizing */
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+    /* center the canvas. */
+    text-align: center;
+    
+    width: 500px;   
+}
+
+.container {
+    height: 520px;
+    background-color: #fff;
+}
+
+canvas {
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+}
+
+.error {
+    cursor: pointer;
+    padding: 5px 10px;
+    font: 1em Georgia;
+    background: #FF5555;
+}
