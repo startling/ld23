@@ -71,12 +71,20 @@ function highlight_movements (player, stage, canvas, context) {
     });
     
     var move = click(function (x, y) {
-        // redraw things to get rid of the boxes
-        stage.draw_tiles(context);
-        stage.draw_characters(context);
         // remove this event listener
         canvas.removeEventListener("click", move);
-        // run the turn again
+        // if the click is in the range, move there.
+        for (var index = 0; index < in_range.length; index ++) {
+            if (in_range[index].x == x && in_range[index].y == y) {
+                player.x = x;
+                player.y = y;
+                break;
+            };
+        }; 
+        // redraw things to get rid of the boxes and move the character
+        stage.draw_tiles(context);
+        stage.draw_characters(context);
+        // gtrun the turn again
         turn(stage, canvas, context);
     });
     canvas.addEventListener("click", move, false);
