@@ -34,6 +34,15 @@ var _base_stage = {
                 context.drawImage(this[row][col].image, x, y);
             };
         };
+    },
+
+    draw_characters: function (context) {
+        // draw each player character (more later)
+        this.players.forEach(function (character) {
+            var x = character.x * tile_size;
+            var y = character.y * tile_size;
+            context.drawImage(character.image, x, y);
+        });
     }
 };
 
