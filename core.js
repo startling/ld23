@@ -52,7 +52,7 @@ function turn(stage, canvas, context, moved) {
         // move all of the npcs.
         console.log("npcs: go!");
         stage.npcs.forEach(function (npc) {
-            npc.move();
+            npc.move(stage, context);
         });
         // and then reset the "moved" counter.
         turn(stage, canvas, context, []);
@@ -83,8 +83,7 @@ function highlight_movements (player, stage, canvas, context, moved) {
             };
         }; 
         // redraw things to get rid of the boxes and move the character
-        stage.draw_tiles(context);
-        stage.draw_characters(context);
+        stage.redraw(context);
         // run the turn again
         turn(stage, canvas, context, moved);
     });
