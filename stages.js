@@ -22,7 +22,7 @@ function Row (arr) {
 
 // the base stage object every other stage inherits rows from.
 var _base_stage = {
-    draw: function (context) {
+    draw_tiles: function (context) {
         // draw this stage to a canvas' 2d context
         for (var row = 0; row < page_height - 1; row++) {
             var x = row * tile_size;
