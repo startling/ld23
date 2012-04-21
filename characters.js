@@ -16,6 +16,8 @@ var _base_character = {
     image: null,
     // and x and y coordinates.
     x: null, y: null,
+    // the distance this thing can move in one turn.
+    speed: 3,
 }
 
 

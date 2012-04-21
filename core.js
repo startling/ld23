@@ -33,10 +33,60 @@ function run_stage (stage, canvas, context) {
     context.save();
     // and draw all of the characters.
     stage.draw_characters(context);
+    turn(stage, canvas, context);
+};
 
-    // just log tiles for now.
-    canvas.addEventListener("click", click(function (x, y) {
-        console.log(x, y);
-    }), false);
-}
+
+function turn(stage, canvas, context) {
+    var listener = click(function (x, y) {
+        stage.players.forEach(function (player) {
+            if (player.x == x && player.y == y) {
+                canvas.removeEventListener("click", listener);
+                highlight_movements(player, stage, canvas, context);
+            };
+        });
+    });
+    canvas.addEventListener("click", listener, false);
+};
+
+
+function highlight_movements (player, stage, canvas, context) {
+    // determine all fo the tile coordinates (from the player's position) that
+    // are in-range.
+    // TODO: ignore blocked paths.
+    var in_range = [];
+    for (var x = -player.speed; x <= player.speed; x++) {
+        for (var y =-player.speed; y <= player.speed; y++) {
+            // ignore the ones that are too far away.
+            if (Math.abs(x) + Math.abs(y) <= player.speed) {
+                in_range.push({x: x + player.x, y: y + player.y});
+            };
+        };
+    };
+
+    // highlight each of those tiles
+    in_range.forEach(function (tile) {
+        context.strokeStyle = "#ffffff";
+        context.strokeRect(tile.x * tile_size, tile.y * tile_size, tile_size, tile_size)
+    });
+    
+    var move = click(function (x, y) {
+        // redraw things to get rid of the boxes
+        stage.draw_tiles(context);
+        stage.draw_characters(context);
+        // remove this event listener
+        canvas.removeEventListener("click", move);
+        // run the turn again
+        turn(stage, canvas, context);
+    });
+    canvas.addEventListener("click", move, false);
+};
+
+
+
+
+
+
+
+
 
