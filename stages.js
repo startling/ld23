@@ -53,7 +53,12 @@ for (var num=0; num < 25; num++) {
 
 function Stage (literal) {
     // create a stage with clones of each row of the base stage.
-    var stage = Object.create(_base_stage, literal);
+    var stage = Object.create(_base_stage);
+    // add each value of the literal to this thing.
+    Object.keys(literal).forEach(function (key) {
+        stage[key] = literal[key];
+    });
+    // copy all of the rows here.
     for (var num = 0; num < 25; num++){
         stage[num] = Object.create(_base_stage[num]);
     };
@@ -65,4 +70,4 @@ function Stage (literal) {
  * These are stages with stuff in them. */
 
 
-first = Stage();
+var first = Stage({});
