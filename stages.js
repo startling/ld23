@@ -43,7 +43,20 @@ var _base_stage = {
             var y = character.y * tile_size;
             context.drawImage(character.image, x, y);
         });
-    }
+    },
+    
+    open: function (x, y) {
+        // return true if a space isn't filled, false otherwise
+        // check if there are any player characters here.
+        for (var index = 0; index < this.players.length; index++) {
+            var character = this.players[index];
+            if (character.x == x && character.y == y) {
+                return false;
+            };
+        };
+        // TODO: check for npcs, obstacles
+        return true
+    },
 };
 
 
@@ -83,5 +96,5 @@ var first = Stage({
     players: [Character({
         name: "you", image: "resources/player.png",
         x: 1, y: 1,
-    })],
+    })]
 });
