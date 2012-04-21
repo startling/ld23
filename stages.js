@@ -26,6 +26,8 @@ var _base_stage = {
     players: null,
     // an (unitialized) list of obstacles
     obstacles: [],
+    // and a list of npcs
+    npcs: [],
 
     draw_tiles: function (context) {
         // draw this stage to a canvas' 2d context
@@ -104,7 +106,7 @@ var _base_stage = {
 
     contains: function () {
         // return an array of everything in here.
-        return this.players.concat(this.obstacles);
+        return this.players.concat(this.obstacles).concat(this.npcs);
     },
 };
 
