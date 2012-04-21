@@ -8,7 +8,7 @@ var page_width = 25;
 
 
 // main list of stages to play.
-levels = [_base_stage]
+levels = [first];
 
 
 // stuff to do when the page finishes loading:

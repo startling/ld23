@@ -56,3 +56,10 @@ function Stage () {
     };
     return stage;
 };
+
+
+/* Defined Stages:
+ * These are stages with stuff in them. */
+
+
+first = Stage();
