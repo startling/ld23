@@ -20,4 +20,9 @@ window.addEventListener('load', function () {
     canvas.height = tile_size * page_height;
     // get its 2d context.
     var context = canvas.getContext("2d");
+
+    // draw the first stage.
+    levels[0].draw_tiles(context);
+    
 }, false);
+
