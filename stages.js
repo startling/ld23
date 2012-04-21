@@ -67,15 +67,15 @@ var _base_stage = {
         // return objects like {x:0, y:0} that are next to given coordinates
         // and *not blocked*.
         var ns = [];
-        for (var delta_x = -1; delta_x <= 1; delta_x++) {
-            for (var delta_y = -1; delta_y <= 1; delta_y++) {
-                this_x = delta_x + x;
-                this_y = delta_y + y;
-                if (this.in_bounds(this_x, this_y) && this.open(this_x, this_y)) {
-                    ns.push({x: this_x, y: this_y});
-                };
+        var _this = this;
+        // the only possible neighbors (no diagonals):
+        [[1, 0], [0, 1], [-1, 0], [0, -1]].forEach(function (c) {
+            var this_x = c[0] + x;
+            var this_y = c[1] + y;
+            if (_this.in_bounds(this_x, this_y) && _this.open(this_x, this_y)) {
+                ns.push({x: this_x, y: this_y});
             };
-        };
+        })
         return ns;
     },
 
