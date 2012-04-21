@@ -33,24 +33,34 @@ function run_stage (stage, canvas, context) {
     context.save();
     // and draw all of the characters.
     stage.draw_characters(context);
-    turn(stage, canvas, context);
+    turn(stage, canvas, context, []);
 };
 
 
-function turn(stage, canvas, context) {
-    var listener = click(function (x, y) {
-        stage.players.forEach(function (player) {
-            if (player.x == x && player.y == y) {
-                canvas.removeEventListener("click", listener);
-                highlight_movements(player, stage, canvas, context);
-            };
+function turn(stage, canvas, context, moved) {
+    if (moved.length < stage.players.length) {
+        var listener = click(function (x, y) {
+            stage.players.forEach(function (player) {
+                if (player.x == x && player.y == y && moved.indexOf(player) == -1) {
+                    canvas.removeEventListener("click", listener);
+                    highlight_movements(player, stage, canvas, context, moved);
+                };
+            });
         });
-    });
-    canvas.addEventListener("click", listener, false);
+        canvas.addEventListener("click", listener, false);
+    } else {
+        // move all of the npcs.
+        console.log("npcs: go!");
+        stage.npcs.forEach(function (npc) {
+            npc.move();
+        });
+        // and then reset the "moved" counter.
+        turn(stage, canvas, context, []);
+    };
 };
 
 
-function highlight_movements (player, stage, canvas, context) {
+function highlight_movements (player, stage, canvas, context, moved) {
     // determine all fo the tile coordinates (from the player's position) that
     // are in-range.
     var in_range = stage.possible(player);
@@ -68,14 +78,15 @@ function highlight_movements (player, stage, canvas, context) {
         for (var index = 0; index < in_range.length; index ++) {
             if (in_range[index].x == x && in_range[index].y == y) {
                 stage.move(player, x, y, context);
+                moved.push(player);
                 break;
             };
         }; 
         // redraw things to get rid of the boxes and move the character
         stage.draw_tiles(context);
         stage.draw_characters(context);
-        // gtrun the turn again
-        turn(stage, canvas, context);
+        // run the turn again
+        turn(stage, canvas, context, moved);
     });
     canvas.addEventListener("click", move, false);
 };
