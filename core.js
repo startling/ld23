@@ -21,9 +21,22 @@ window.addEventListener('load', function () {
     // get its 2d context.
     var context = canvas.getContext("2d");
 
-    // draw the first stage.
-    levels[0].draw_tiles(context);
-    levels[0].draw_characters(context);
-    
+    // run the first stage.
+    run_stage(levels[0], canvas, context);
+
 }, false);
+
+
+function run_stage (stage, canvas, context) {
+    stage.draw_tiles(context);
+    // save the stage's background only.
+    context.save();
+    // and draw all of the characters.
+    stage.draw_characters(context);
+
+    // just log tiles for now.
+    canvas.addEventListener("click", click(function (x, y) {
+        console.log(x, y);
+    }), false);
+}
 
