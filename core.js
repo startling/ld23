@@ -3,7 +3,7 @@
 // and constants for tile height and width and page height and width (in
 // number of tiles, not pixels).
 var tile_size = 20;
-var page_height = 26;
+var page_height = 25;
 var page_width = 25;
 
 

@@ -27,7 +27,7 @@ var _base_stage = {
 
     draw_tiles: function (context) {
         // draw this stage to a canvas' 2d context
-        for (var row = 0; row < page_height - 1; row++) {
+        for (var row = 0; row < page_height; row++) {
             var x = row * tile_size;
             for (var col = 0; col < page_width; col ++) {
                 var y = col * tile_size;
