@@ -23,6 +23,7 @@ window.addEventListener('load', function () {
 
     // draw the first stage.
     levels[0].draw_tiles(context);
+    levels[0].draw_characters(context);
     
 }, false);
 
