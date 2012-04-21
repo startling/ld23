@@ -57,6 +57,11 @@ var _base_stage = {
         // TODO: check for npcs, obstacles
         return true
     },
+    
+    in_bounds: function(x, y) {
+        // determine whether a space is in-bounds
+        return x >= 0 && y >= 0 && x < page_width && y < page_height
+    },
 
     neighbors: function (x, y) {
         // return objects like {x:0, y:0} that are next to given coordinates
@@ -66,13 +71,33 @@ var _base_stage = {
             for (var delta_y = -1; delta_y <= 1; delta_y++) {
                 this_x = delta_x + x;
                 this_y = delta_y + y;
-                if (this_y >= 0 && this_x >= 0 && this_x < page_width &&
-                       this_y < page_height && this.open(this_x, this_y)) {
+                if (this.in_bounds(this_x, this_y) && this.open(this_x, this_y)) {
                     ns.push({x: this_x, y: this_y});
                 };
             };
         };
         return ns;
+    },
+
+    possible: function (character) {
+        // return a list of the possible (unblocked) moves for a character
+        var ps = [];
+        var these = {
+            1: [this.neighbors(character.x, character.y)],
+        }
+        var counter = 1;
+        var _this = this;
+        while (counter < character.speed) {
+            these[counter + 1] = [];
+            these[counter].forEach(function (set) {
+                ps = ps.concat(set);
+                set.forEach(function (c) {
+                    these[counter + 1].push(_this.neighbors(c.x, c.y));
+                });
+            });
+            counter++;
+        };
+        return ps;
     },
 };
 
@@ -113,5 +138,8 @@ var first = Stage({
     players: [Character({
         name: "you", image: "resources/player.png",
         x: 1, y: 1,
+    }), Character({
+        name: "me", image: "resources/player.png",
+        x: 3, y: 3,
     })]
 });
