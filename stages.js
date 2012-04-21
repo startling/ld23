@@ -83,9 +83,9 @@ var _base_stage = {
         // return a list of the possible (unblocked) moves for a character
         var ps = [];
         var these = {
-            1: [this.neighbors(character.x, character.y)],
+            0: [this.neighbors(character.x, character.y)],
         }
-        var counter = 1;
+        var counter = 0;
         var _this = this;
         while (counter < character.speed) {
             these[counter + 1] = [];
