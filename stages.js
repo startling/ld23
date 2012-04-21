@@ -57,6 +57,23 @@ var _base_stage = {
         // TODO: check for npcs, obstacles
         return true
     },
+
+    neighbors: function (x, y) {
+        // return objects like {x:0, y:0} that are next to given coordinates
+        // and *not blocked*.
+        var ns = [];
+        for (var delta_x = -1; delta_x <= 1; delta_x++) {
+            for (var delta_y = -1; delta_y <= 1; delta_y++) {
+                this_x = delta_x + x;
+                this_y = delta_y + y;
+                if (this_y >= 0 && this_x >= 0 && this_x < page_width &&
+                       this_y < page_height && this.open(this_x, this_y)) {
+                    ns.push({x: this_x, y: this_y});
+                };
+            };
+        };
+        return ns;
+    },
 };
 
 
