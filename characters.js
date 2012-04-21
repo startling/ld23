@@ -25,7 +25,7 @@ var _base_character = {
         n.y = y;
         return n;
     },
-}
+};
 
 
 function Character (literal) {
@@ -46,4 +46,9 @@ function Character (literal) {
 
 var player = Character({
     name: "you", image: "resources/player.png",
-})
+});
+
+
+var block = Character({
+    name: "a block", image: "resources/block.png",
+});
