@@ -25,6 +25,11 @@ var _base_character = {
         n.y = y;
         return n;
     },
+
+    move: function (stage) {
+        // gets called whenever an npc has a chance to move.
+        return;
+    },
 };
 
 
