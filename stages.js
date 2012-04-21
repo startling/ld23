@@ -113,6 +113,13 @@ var _base_stage = {
         //TODO: smooth animation/pathfinding
         character.x = x;
         character.y = y;
+        this.redraw(context);
+    },
+
+    redraw: function (context) {
+        context.clearRect(0, 0, tile_size * page_height, tile_size * page_width);
+        this.draw_tiles(context);
+        this.draw_characters(context);
     },
 };
 
