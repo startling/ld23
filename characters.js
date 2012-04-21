@@ -26,7 +26,7 @@ var _base_character = {
         return n;
     },
 
-    move: function (stage) {
+    move: function (stage, context) {
         // gets called whenever an npc has a chance to move.
         return;
     },
@@ -61,4 +61,12 @@ var block = Character({
 
 var npc = Character({
     name: "magenta square", image: "resources/npc.png",
+    move: function (stage, context) {
+        // gets called whenever an npc has a chance to move.
+        var x = this.x;
+        var y = this.y + 1;
+        if (stage.open(x, y) && stage.in_bounds(x, y)) {
+            stage.move(this, this.x, this.y + 1, context);
+        };
+    },
 });
