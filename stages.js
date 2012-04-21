@@ -79,4 +79,9 @@ function Stage (literal) {
  * These are stages with stuff in them. */
 
 
-var first = Stage({});
+var first = Stage({
+    players: [Character({
+        name: "you", image: "resources/player.png",
+        x: 1, y: 1,
+    })],
+});
