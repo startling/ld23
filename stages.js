@@ -14,7 +14,7 @@
 
 // row objects, given an array.
 function Row (arr) {
-    for (var num=0; num < 20; num++) {
+    for (var num=0; num < 25; num++) {
         this[num] = arr[num];
     };
 };
@@ -23,9 +23,10 @@ function Row (arr) {
 // the base stage object every other stage inherits rows from.
 var _base_stage = {}
 // fill it up with 20 new rows
-for (var num=0; num < 20; num++) {
+for (var num=0; num < 25; num++) {
     // each of which is a sky tile for now.
     _base_stage[num] = new Row([
+        tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
         tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
         tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
         tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
@@ -37,7 +38,7 @@ for (var num=0; num < 20; num++) {
 function Stage () {
     // create a stage with clones of each row of the base stage.
     var stage = Object.create(_base_stage);
-    for (var num = 0; num < 20; num++){
+    for (var num = 0; num < 25; num++){
         stage[num] = Object.create(_base_stage[num]);
     };
     return stage;
