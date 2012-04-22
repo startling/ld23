@@ -78,6 +78,16 @@ function highlight_movements (player, stage, canvas, context, moved) {
         for (var index = 0; index < in_range.length; index ++) {
             if (in_range[index].x == x && in_range[index].y == y) {
                 stage.move(player, x, y, context, function resume () {
+                    // try attacking all of the npcs.
+                    stage.npcs.forEach(function (npc) {
+                        // if an npc is orthagonal to a player, attack it.
+                        var o_x = Math.abs(npc.x - player.x) == 1 && npc.y - player.y == 0;
+                        var o_y = Math.abs(npc.y - player.y) == 1 && npc.x - player.x == 0;
+                        if (o_x | o_y) {
+                            console.log(player.name, "are attacking the", npc.name);
+                        };
+                    });
+
                     moved.push(player);
                     stage.redraw(context);
                     turn(stage, canvas, context, moved);
