@@ -18,7 +18,7 @@ levels = [first];
 // stuff to do when the page finishes loading:
 window.addEventListener('load', function () {
     // get the canvas element
-    var canvas = document.getElementsByTagName("canvas")[0];
+    var canvas = document.getElementById("board");
     // set its height and width.
     canvas.width = tile_size * page_width;
     canvas.height = tile_size * page_height;
