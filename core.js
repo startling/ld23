@@ -53,6 +53,15 @@ function turn(stage, canvas, context, moved) {
         console.log("npcs: go!");
         stage.npcs.forEach(function (npc) {
             npc.move(stage, context);
+            // try attacking all of the players.
+            stage.players.forEach(function (player) {
+                // if an npc is orthagonal to a player, attack it.
+                var o_x = Math.abs(npc.x - player.x) == 1 && npc.y - player.y == 0;
+                var o_y = Math.abs(npc.y - player.y) == 1 && npc.x - player.x == 0;
+                if (o_x | o_y) {
+                    console.log(npc.name, "is attacking", player.name);
+                };
+            });
         });
         // and then reset the "moved" counter.
         turn(stage, canvas, context, []);
