@@ -30,6 +30,8 @@ var _base_stage = {
     obstacles: [],
     // and a list of npcs
     npcs: [],
+    // nice information regarding this page.
+    subtitle: "",
 
     open: function (x, y) {
         // return true if a space isn't filled, false otherwise
@@ -227,7 +229,8 @@ function Stage (literal) {
 
 var first = Stage({
     background: "resources/background_1.png",
-    players: [player.at(0, 2), player.at(2, 2)],
+    subtitle: "get the firefly.",
+    players: [player.at(3, 3), player.at(7, 7)],
     obstacles: [block.at(1, 1), block.at(1, 2), block.at(1, 3)],
     npcs: [npc.at(5, 5)]
 });
