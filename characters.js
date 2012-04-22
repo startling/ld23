@@ -108,19 +108,33 @@ function Character (literal) {
 
 
 var player = Character({
-    name: "you", image: "resources/player.png",
+    name: "pc", image: "resources/player.png",
 });
 
 
 var block = Character({
-    name: "a block", image: "resources/block.png",
+    name: "a block", image: "resources/firefly.png",
 });
 
 var rock_1 = Character({image: "resources/rock_1.png"});
 
 
+var puddle = {
+    top: Character({image: "resources/puddle_top.png"}),
+    left: Character({image: "resources/puddle_left.png"}),
+    right: Character({image: "resources/puddle_right.png"}),
+    bottom: Character({image: "resources/puddle_bottom.png"}),
+    middle: Character({image: "resources/puddle_middle.png"}),
+    tl: Character({image: "resources/puddle_top_left.png"}),
+    tr: Character({image: "resources/puddle_top_right.png"}),
+    bl: Character({image: "resources/puddle_bottom_left.png"}),
+    br: Character({image: "resources/puddle_bottom_right.png"}),
+    inside_bl: Character({image: "resources/puddle_inside_bl.png"}),
+};
+
+
 var npc = Character({
-    name: "magenta square", image: "resources/npc.png",
+    name: "npc", image: "resources/npc.png",
     move: function (stage, context, resume) {
         // gets called whenever an npc has a chance to move.
         // list of all the possible places to go.
