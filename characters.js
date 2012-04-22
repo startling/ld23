@@ -61,6 +61,7 @@ var _base_character = {
             
             if (Math.abs(delta_y) <= 1 && Math.abs(delta_x) <= 1) {
                 stage.redraw(context);
+                other.hp -= _this.attack;
                 resume();
             } else {
                 setTimeout(redraw, 40);
