@@ -24,28 +24,45 @@ window.addEventListener('load', function () {
     canvas.height = tile_size * page_height;
     // get its 2d context.
     var context = canvas.getContext("2d");
-
+    // get the little information bar
+    var i_canvas = document.getElementById("information");
+    var i_context = i_canvas.getContext("2d");
+    i_canvas.width = tile_size * page_width;
+    i_canvas.height = tile_size * 2;
     // run the first stage.
-    run_stage(levels[0], canvas, context);
+    run_stage(levels[0], canvas, context, i_context);
 
 }, false);
 
 
-function run_stage (stage, canvas, context) {
+function run_stage (stage, canvas, context, i_context) {
     stage.redraw(context);
-    turn(stage, canvas, context, []);
+    turn(stage, canvas, context, i_context, []);
 };
 
 
-function turn(stage, canvas, context, moved) {
+function turn(stage, canvas, context, i_context, moved) {
     if (moved.length < stage.players.length) {
         var listener = click(function (x, y) {
+            var clicked_on = false;
             stage.players.forEach(function (player) {
                 if (player.x == x && player.y == y && moved.indexOf(player) == -1) {
                     canvas.removeEventListener("click", listener);
-                    highlight_movements(player, stage, canvas, context, moved);
+                    player.information(i_context);
+                    highlight_movements(player, stage, canvas, context, i_context, moved);
+                    clicked_on = true;
                 };
             });
+            if (!clicked_on) {
+                for (var i = 0; i < stage.npcs.length; i++) {
+                    var npc = stage.npcs[i];
+                    if (npc.x == x && npc.y == y) {
+                        npc.information(i_context);
+                        clicked_on = true;
+                        break
+                    };
+                };
+            };
         });
         canvas.addEventListener("click", listener, false);
     } else {
@@ -55,7 +72,7 @@ function turn(stage, canvas, context, moved) {
             var index = 0;
             function next () {
                 if (index >= stage.players.length) {
-                    turn(stage, canvas, context, []);
+                    turn(stage, canvas, context, i_context, []);
                 } else {
                     var player = stage.players[index];
                     // if an npc is orthagonal to a player, attack it.
@@ -76,7 +93,7 @@ function turn(stage, canvas, context, moved) {
 };
 
 
-function highlight_movements (player, stage, canvas, context, moved) {
+function highlight_movements (player, stage, canvas, context, i_context, moved) {
     // determine all fo the tile coordinates (from the player's position) that
     // are in-range.
     var in_range = stage.possible(player);
@@ -106,7 +123,7 @@ function highlight_movements (player, stage, canvas, context, moved) {
 
                     moved.push(player);
                     stage.redraw(context);
-                    turn(stage, canvas, context, moved);
+                    turn(stage, canvas, context, i_context, moved);
                 });
                 have_moved = true;
                 break;
@@ -116,7 +133,7 @@ function highlight_movements (player, stage, canvas, context, moved) {
             // redraw things to get rid of the boxes and move the character
             stage.redraw(context);
             // run the turn again
-            turn(stage, canvas, context, moved);
+            turn(stage, canvas, context, i_context, moved);
         }
     });
     canvas.addEventListener("click", move, false);

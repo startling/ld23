@@ -35,6 +35,13 @@ var _base_character = {
         return;
     },
 
+    information: function (to) {
+        to.clearRect(0, 0, 500, 40);
+        to.fillStyle = "#000000";
+        to.font="12px subtitles";
+        to.fillText(this.name, 0, 20);
+    },
+
     attack: function (other, stage, context, resume) {
         // MAKE SURE THE OTHER IS WITHIN ONE TILE
         // figure out what direction to jerk towards.
