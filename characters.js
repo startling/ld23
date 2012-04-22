@@ -18,6 +18,8 @@ var _base_character = {
     x: null, y: null,
     // the distance this thing can move in one turn.
     speed: 3,
+    // hit points!
+    hp: 10,
 
     at: function (x, y) {
         var n = Object.create(this);
