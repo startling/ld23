@@ -115,14 +115,18 @@ var _base_stage = {
         this.redraw(context);
     },
 
-    redraw: function (context) {
+    redraw: function (context, except) {
+        // given an optional argument of a character *not* to draw, draw all of
+        // the tiles and characters.
         context.clearRect(0, 0, tile_size * page_height, tile_size * page_width);
         context.drawImage(this.background, 0, 0);
-        // draw each player character (more later)
+        // draw each character + obstacle.
         this.contains().forEach(function (character) {
-            var x = character.x * tile_size;
-            var y = character.y * tile_size;
-            context.drawImage(character.image, x, y);
+            if (character != except) {
+                var x = character.x * tile_size;
+                var y = character.y * tile_size;
+                context.drawImage(character.image, x, y);
+            };
         });
     },
 };
