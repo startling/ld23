@@ -19,7 +19,7 @@ var _base_character = {
     // the distance this thing can move in one turn.
     speed: 3,
     // hit points!
-    hp: 10,
+    max_hp: 10,
 
     at: function (x, y) {
         var n = Object.create(this);
@@ -46,6 +46,8 @@ function Character (literal) {
     var image = new Image();
     image.src = character.image;
     character.image = image;
+    // set its hp to its max_hp
+    chatacter.hp = character.max_hp;
     // and return it.
     return character
 };
