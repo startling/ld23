@@ -110,20 +110,25 @@ function highlight_movements (player, stage, canvas, context, i_context, moved) 
         // if the click is in the range, move there.
         for (var index = 0; index < in_range.length; index ++) {
             if (in_range[index].x == x && in_range[index].y == y) {
-                stage.move(player, x, y, context, function resume () {
-                    // try attacking all of the npcs.
-                    stage.npcs.forEach(function (npc) {
+                var index = 0;
+                stage.move(player, x, y, context, function next () {
+                    if (index >= stage.npcs.length) {
+                        moved.push(player);
+                        stage.redraw(context);
+                        turn(stage, canvas, context, i_context, moved);
+                    } else {
+                        var npc = stage.npcs[index];
                         // if an npc is orthagonal to a player, attack it.
                         var o_x = Math.abs(npc.x - player.x) == 1 && npc.y - player.y == 0;
                         var o_y = Math.abs(npc.y - player.y) == 1 && npc.x - player.x == 0;
+                        index++;
                         if (o_x | o_y) {
-                            console.log(player.name, "are attacking the", npc.name);
+                            console.log(player.name, "is attacking", npc.name);
+                            player.attack(npc, stage, context, next);
+                        } else {
+                            next();
                         };
-                    });
-
-                    moved.push(player);
-                    stage.redraw(context);
-                    turn(stage, canvas, context, i_context, moved);
+                    };
                 });
                 have_moved = true;
                 break;
