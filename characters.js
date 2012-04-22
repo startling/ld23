@@ -20,6 +20,8 @@ var _base_character = {
     speed: 3,
     // hit points!
     max_hp: 10,
+    // damage
+    attack: 2,
 
     at: function (x, y) {
         var n = Object.create(this);
@@ -47,7 +49,7 @@ function Character (literal) {
     image.src = character.image;
     character.image = image;
     // set its hp to its max_hp
-    chatacter.hp = character.max_hp;
+    character.hp = character.max_hp;
     // and return it.
     return character
 };
@@ -67,10 +69,11 @@ var npc = Character({
     name: "magenta square", image: "resources/npc.png",
     move: function (stage, context) {
         // gets called whenever an npc has a chance to move.
-        var x = this.x;
-        var y = this.y + 1;
-        if (stage.open(x, y) && stage.in_bounds(x, y)) {
-            stage.move(this, this.x, this.y + 1, context);
-        };
+        // list of all the possible places to go.
+        var possible = stage.possible(this);
+        // find a random tile to go to.
+        var index = Math.floor(Math.random() * possible.length)
+        var tile = possible[index];
+        stage.move(this, tile.x, tile.y, context);
     },
 });
