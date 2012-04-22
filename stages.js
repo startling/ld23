@@ -110,29 +110,34 @@ var _base_stage = {
 
     path_to: function (ax, ay, bx, by, max) {
         // wooh tree recursion
-        if (max < 0) {
+        if (max < 0 | !this.open(bx, by)) {
             return null;
         } else if (ax == bx && ay == by) {
             return [];
         } else {
             var neighbors = this.neighbors(ax, ay);
+            var shortest = null;
             for (var i = 0; i < neighbors.length; i ++) {
                 var c = neighbors[i];
                 var tried  = this.path_to(c.x, c.y, bx, by, max - 1);
                 if (tried != null) {
-                    return [c].concat(tried);
+                    var success = [c].concat(tried);
+                    if (shortest == null) {
+                        shortest = success;
+                    } else if (success.length < shortest.length) {
+                        shortest = success;   
+                    };
                 };
             }; 
+            return shortest;
         };
     
     },
 
     move: function (character, x, y, context, resume) {
         var steps = this.path_to(character.x, character.y, x, y, character.speed);
-        console.log(steps);
         var index = 0;
         var _this = this;
-        console.log(index, index < steps.length - 1);
         function step () {
             if (index < steps.length - 1) {
                 var c = steps[index];
