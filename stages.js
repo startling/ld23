@@ -83,7 +83,24 @@ var _base_stage = {
             });
             counter++;
         };
-        return ps;
+        // filter out duplicates
+        // TODO: make this better/faster
+        var uniques = [];
+        ps.forEach(function (c) {
+            // keep track of whether we've seen this thing
+            var already = false;
+            // if it's not already in "uniques", add it.
+            for (var i = 0; i < uniques.length; i++) {
+                if (uniques[i].x == c.x && uniques[i].y == c.y) {
+                    already = true;
+                    break;
+                };
+            };
+            if (!already) {
+                uniques.push(c);
+            };
+        });
+        return uniques;
     },
 
     contains: function () {
