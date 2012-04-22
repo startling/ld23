@@ -1,3 +1,12 @@
+@font-face { 
+    font-family: subtitles; 
+    src: url('silkscreen/slkscre.ttf'); 
+}
+
+body {
+    font-face: subtitles;
+}
+
 .container, .error {
     display: box;
     margin-left: auto;
