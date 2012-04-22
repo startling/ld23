@@ -31,19 +31,6 @@ var _base_stage = {
     // and a list of npcs
     npcs: [],
 
-    draw_tiles: function (context) {
-        context.drawImage(this.background, 0, 0);
-    },
-
-    draw_characters: function (context) {
-        // draw each player character (more later)
-        this.contains().forEach(function (character) {
-            var x = character.x * tile_size;
-            var y = character.y * tile_size;
-            context.drawImage(character.image, x, y);
-        });
-    },
-    
     open: function (x, y) {
         // return true if a space isn't filled, false otherwise
         // check if there are any player characters here.
@@ -113,8 +100,13 @@ var _base_stage = {
 
     redraw: function (context) {
         context.clearRect(0, 0, tile_size * page_height, tile_size * page_width);
-        this.draw_tiles(context);
-        this.draw_characters(context);
+        context.drawImage(this.background, 0, 0);
+        // draw each player character (more later)
+        this.contains().forEach(function (character) {
+            var x = character.x * tile_size;
+            var y = character.y * tile_size;
+            context.drawImage(character.image, x, y);
+        });
     },
 };
 

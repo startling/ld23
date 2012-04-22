@@ -28,11 +28,7 @@ window.addEventListener('load', function () {
 
 
 function run_stage (stage, canvas, context) {
-    stage.draw_tiles(context);
-    // save the stage's background only.
-    context.save();
-    // and draw all of the characters.
-    stage.draw_characters(context);
+    stage.redraw(context);
     turn(stage, canvas, context, []);
 };
 
