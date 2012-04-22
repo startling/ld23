@@ -116,6 +116,8 @@ var block = Character({
     name: "a block", image: "resources/block.png",
 });
 
+var rock_1 = Character({image: "resources/rock_1.png"});
+
 
 var npc = Character({
     name: "magenta square", image: "resources/npc.png",
