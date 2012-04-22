@@ -195,6 +195,16 @@ var _base_stage = {
             };
         });
     },
+
+    win: function () {
+        // you win if there are no npcs left
+        return this.npcs.length == 0;
+    },
+
+    lose: function () {
+        // and you lose if there are no players left.
+        return this.players.length == 0;
+    },
 };
 
 

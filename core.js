@@ -30,6 +30,7 @@ window.addEventListener('load', function () {
     i_canvas.width = tile_size * page_width;
     i_canvas.height = tile_size * 2;
     // run the first stage.
+    var f = Object.create(levels[0])
     run_stage(levels[0], canvas, context, i_context);
 
 }, false);
@@ -42,7 +43,11 @@ function run_stage (stage, canvas, context, i_context) {
 
 
 function turn(stage, canvas, context, i_context, moved) {
-    if (moved.length < stage.players.length) {
+    if (stage.win()) {
+        console.log("you won");
+    } else if (stage.lose()) {
+        console.log("you lost");
+    } else if (moved.length < stage.players.length) {
         var listener = click(function (x, y) {
             var clicked_on = false;
             stage.players.forEach(function (player) {
