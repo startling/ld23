@@ -108,11 +108,35 @@ var _base_stage = {
         return this.players.concat(this.obstacles).concat(this.npcs);
     },
 
-    move: function(character, x, y, context) {
+    move: function(character, x, y, context, resume) {
         //TODO: smooth animation/pathfinding
-        character.x = x;
-        character.y = y;
-        this.redraw(context);
+        //TODO: move one-by-one, not all-at-once like this.
+        this.move_one(character, x, y, context, resume);
+    },
+
+    move_one: function (character, x, y, context, resume) {
+        // move smoothly from one square to another.
+        var delta_x = x - character.x;
+        var delta_y = y - character.y;
+        var now_x = character.x * tile_size + delta_x;
+        var now_y = character.y * tile_size + delta_y;
+        var _this = this
+        setTimeout(function redraw () {
+            _this.redraw(context, character);
+            context.drawImage(character.image, now_x, now_y);
+            now_x += delta_x;
+            now_y += delta_y;
+            if (now_x == x * tile_size && now_y == y * tile_size) {
+                character.x = x;
+                character.y = y;
+                _this.redraw(context);
+                if (resume) {
+                    resume();
+                }
+            } else {
+                setTimeout(redraw, 7);
+            };
+        }, 7);
     },
 
     redraw: function (context, except) {

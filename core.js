@@ -73,18 +73,25 @@ function highlight_movements (player, stage, canvas, context, moved) {
     var move = click(function (x, y) {
         // remove this event listener
         canvas.removeEventListener("click", move);
+        var have_moved = false;
         // if the click is in the range, move there.
         for (var index = 0; index < in_range.length; index ++) {
             if (in_range[index].x == x && in_range[index].y == y) {
-                stage.move(player, x, y, context);
-                moved.push(player);
+                stage.move(player, x, y, context, function resume () {
+                    moved.push(player);
+                    stage.redraw(context);
+                    turn(stage, canvas, context, moved);
+                });
+                have_moved = true;
                 break;
             };
         }; 
-        // redraw things to get rid of the boxes and move the character
-        stage.redraw(context);
-        // run the turn again
-        turn(stage, canvas, context, moved);
+        if (!have_moved) {
+            // redraw things to get rid of the boxes and move the character
+            stage.redraw(context);
+            // run the turn again
+            turn(stage, canvas, context, moved);
+        }
     });
     canvas.addEventListener("click", move, false);
 };
