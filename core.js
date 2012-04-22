@@ -12,7 +12,8 @@ highlight.src = "resources/highlight.png"
 
 
 // main list of stages to play.
-levels = [first, first];
+var levels = [first, first];
+var this_stage = 0;
 
 
 // stuff to do when the page finishes loading:
@@ -44,11 +45,12 @@ function run_stage (stage, canvas, context, i_context) {
 
 function turn(stage, canvas, context, i_context, moved) {
     if (stage.win()) {
-        if (levels.indexOf(stage) == levels.length - 1){
+        if (this_stage == levels.length - 1){
             console.log("you won everything");
         } else {
-            var n = levels.indexOf(stage) + 1;
-            run_stage(levels[n](), canvas, context, i_context);
+            this_stage += 1;
+            console.log(levels[this_stage]())
+            run_stage(levels[this_stage](), canvas, context, i_context);
         };
     } else if (stage.lose()) {
         var n = levels.indexOf(stage);
