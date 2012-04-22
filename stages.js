@@ -108,10 +108,41 @@ var _base_stage = {
         return this.players.concat(this.obstacles).concat(this.npcs);
     },
 
-    move: function(character, x, y, context, resume) {
-        //TODO: smooth animation/pathfinding
-        //TODO: move one-by-one, not all-at-once like this.
-        this.move_one(character, x, y, context, resume);
+    path_to: function (ax, ay, bx, by, max) {
+        // wooh tree recursion
+        if (max < 0) {
+            return null;
+        } else if (ax == bx && ay == by) {
+            return [];
+        } else {
+            var neighbors = this.neighbors(ax, ay);
+            for (var i = 0; i < neighbors.length; i ++) {
+                var c = neighbors[i];
+                var tried  = this.path_to(c.x, c.y, bx, by, max - 1);
+                if (tried != null) {
+                    return [c].concat(tried);
+                };
+            }; 
+        };
+    
+    },
+
+    move: function (character, x, y, context, resume) {
+        var steps = this.path_to(character.x, character.y, x, y, character.speed);
+        console.log(steps);
+        var index = 0;
+        var _this = this;
+        console.log(index, index < steps.length - 1);
+        function step () {
+            if (index < steps.length - 1) {
+                var c = steps[index];
+                index++;
+                _this.move_one(character, c.x, c.y, context, step);
+            } else {
+                _this.move_one(character, x, y, context, resume);
+            }
+        };
+        step();
     },
 
     move_one: function (character, x, y, context, resume) {
