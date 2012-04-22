@@ -12,16 +12,18 @@
  * */
 
 
-// row objects, given an array.
-function Row (arr) {
+// row objects
+function Row () {
     for (var num=0; num < 25; num++) {
-        this[num] = arr[num];
+        this[num] = null;
     };
 };
 
 
 // the base stage object every other stage inherits rows from.
 var _base_stage = {
+    // a background image
+    background: null,
     // an (uninitialized) list of the player characters...
     players: null,
     // an (unitialized) list of obstacles
@@ -30,14 +32,7 @@ var _base_stage = {
     npcs: [],
 
     draw_tiles: function (context) {
-        // draw this stage to a canvas' 2d context
-        for (var row = 0; row < page_height; row++) {
-            var x = row * tile_size;
-            for (var col = 0; col < page_width; col ++) {
-                var y = col * tile_size;
-                context.drawImage(this[row][col].image, x, y);
-            };
-        };
+        context.drawImage(this.background, 0, 0);
     },
 
     draw_characters: function (context) {
@@ -124,16 +119,9 @@ var _base_stage = {
 };
 
 
-// fill it up with 20 new rows
+// fill it up with new rows
 for (var num=0; num < 25; num++) {
-    // each of which is a sky tile for now.
-    _base_stage[num] = new Row([
-        tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
-        tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
-        tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
-        tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
-        tiles.sky, tiles.sky, tiles.sky, tiles.sky, tiles.sky,
-    ]);
+    _base_stage[num] = new Row();
 };
 
 
@@ -144,9 +132,13 @@ function Stage (literal) {
     Object.keys(literal).forEach(function (key) {
         stage[key] = literal[key];
     });
-    // copy all of the rows here.
+    // set the background image to the image it got...
+    var image = new Image();
+    image.src = stage.background;
+    stage.background = image;
+    // create new rows.
     for (var num = 0; num < 25; num++){
-        stage[num] = Object.create(_base_stage[num]);
+        stage[num] = new Row();
     };
     return stage;
 };
@@ -157,6 +149,7 @@ function Stage (literal) {
 
 
 var first = Stage({
+    background: "resources/background_1.png",
     players: [player.at(0, 2), player.at(2, 2)],
     obstacles: [block.at(1, 1), block.at(1, 2), block.at(1, 3)],
     npcs: [npc.at(5, 5)]
