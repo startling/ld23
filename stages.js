@@ -237,10 +237,12 @@ function Stage (literal) {
  * These are stages with stuff in them. */
 
 
-var first = Stage({
-    background: "resources/background_1.png",
-    subtitle: "get the firefly.",
-    players: [player.at(3, 3), player.at(7, 7)],
-    obstacles: [block.at(1, 1), block.at(1, 2), block.at(1, 3)],
-    npcs: [npc.at(5, 5)]
-});
+function first(){ 
+    return Stage({
+        background: "resources/background_1.png",
+        subtitle: "get the firefly.",
+        players: [player.at(3, 3), player.at(7, 7)],
+        obstacles: [block.at(1, 1), block.at(1, 2), block.at(1, 3)],
+        npcs: [npc.at(5, 5)]
+    });
+};
