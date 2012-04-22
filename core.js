@@ -64,7 +64,7 @@ function turn(stage, canvas, context, moved) {
                     index++;
                     if (o_x | o_y) {
                         console.log(npc.name, "is attacking", player.name);
-                        next();
+                        npc.attack(player, stage, context, next);
                     } else {
                         next();
                     };

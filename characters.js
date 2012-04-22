@@ -34,6 +34,39 @@ var _base_character = {
         // gets called whenever an npc has a chance to move.
         return;
     },
+
+    attack: function (other, stage, context, resume) {
+        // MAKE SURE THE OTHER IS WITHIN ONE TILE
+        // figure out what direction to jerk towards.
+        var delta_x = other.x - this.x;
+        var delta_y = other.y - this.y;
+
+        var up = true;
+        var _this = this;
+
+        // assume it's one pixel! (don't draw this thing)
+        setTimeout(function redraw () {
+            stage.redraw(context, _this);
+            if (Math.abs(delta_y) > 5 | Math.abs(delta_x) > 5) {
+                up = false;
+            }
+            if (up) {
+                delta_y *= 1.5; delta_x *= 1.5;
+            } else {
+                delta_y /= 1.5; delta_x /= 1.5;
+            };
+            var now_x = _this.x * tile_size + delta_x
+            var now_y = _this.y * tile_size + delta_y
+            context.drawImage(_this.image, now_x, now_y);
+            
+            if (Math.abs(delta_y) <= 1 && Math.abs(delta_x) <= 1) {
+                stage.redraw(context);
+                resume();
+            } else {
+                setTimeout(redraw, 40);
+            };
+        }, 40);
+    },
 };
 
 
@@ -67,13 +100,13 @@ var block = Character({
 
 var npc = Character({
     name: "magenta square", image: "resources/npc.png",
-    move: function (stage, context) {
+    move: function (stage, context, resume) {
         // gets called whenever an npc has a chance to move.
         // list of all the possible places to go.
         var possible = stage.possible(this);
         // find a random tile to go to.
         var index = Math.floor(Math.random() * possible.length)
         var tile = possible[index];
-        stage.move(this, tile.x, tile.y, context);
+        stage.move(this, tile.x, tile.y, context, resume);
     },
 });
