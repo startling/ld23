@@ -6,6 +6,10 @@ var tile_size = 20;
 var page_height = 25;
 var page_width = 25;
 
+// the image we use to highlight tiles
+var highlight = new Image();
+highlight.src = "resources/highlight.png"
+
 
 // main list of stages to play.
 levels = [first];
@@ -63,8 +67,7 @@ function highlight_movements (player, stage, canvas, context, moved) {
 
     // highlight each of those tiles
     in_range.forEach(function (tile) {
-        context.strokeStyle = "#ffffff";
-        context.strokeRect(tile.x * tile_size, tile.y * tile_size, tile_size, tile_size)
+        context.drawImage(highlight, tile.x * tile_size, tile.y * tile_size)
     });
     
     var move = click(function (x, y) {
