@@ -63,6 +63,13 @@ function turn(stage, canvas, context, i_context, moved) {
                     };
                 };
             };
+            if (!clicked_on) {
+                i_context.clearRect(0, 0, 500, 40);
+                i_context.fillStyle = "#000000";
+                i_context.font="12px subtitles";
+                console.log("!")
+                i_context.fillText(stage.subtitle, 0, 20);
+            };
         });
         canvas.addEventListener("click", listener, false);
     } else {
