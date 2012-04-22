@@ -21,7 +21,7 @@ var _base_character = {
     // hit points!
     max_hp: 10,
     // damage
-    attack: 2,
+    damage: 2,
 
     at: function (x, y) {
         var n = Object.create(this);
@@ -39,7 +39,7 @@ var _base_character = {
         to.clearRect(0, 0, 500, 40);
         to.fillStyle = "#000000";
         to.font="12px subtitles";
-        to.fillText(this.name, 0, 20);
+        to.fillText(this.name + " (" + this.hp + "/" + this.max_hp + ")", 0, 20);
     },
 
     attack: function (other, stage, context, resume) {
@@ -68,7 +68,7 @@ var _base_character = {
             
             if (Math.abs(delta_y) <= 1 && Math.abs(delta_x) <= 1) {
                 stage.redraw(context);
-                other.hp -= _this.attack;
+                other.hp -= _this.damage;
                 resume();
             } else {
                 setTimeout(redraw, 40);
