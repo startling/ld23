@@ -138,6 +138,10 @@ var _base_stage = {
         var steps = this.path_to(character.x, character.y, x, y, character.speed);
         var index = 0;
         var _this = this;
+
+        // handle illegal moves.
+        if (steps == null) return;
+
         function step () {
             if (index < steps.length - 1) {
                 var c = steps[index];
