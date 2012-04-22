@@ -12,7 +12,7 @@ highlight.src = "resources/highlight.png"
 
 
 // main list of stages to play.
-levels = [first];
+levels = [first, first];
 
 
 // stuff to do when the page finishes loading:
@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
     i_canvas.height = tile_size * 2;
     // run the first stage.
     var f = Object.create(levels[0])
-    run_stage(levels[0], canvas, context, i_context);
+    run_stage(levels[0](), canvas, context, i_context);
 
 }, false);
 
@@ -44,9 +44,15 @@ function run_stage (stage, canvas, context, i_context) {
 
 function turn(stage, canvas, context, i_context, moved) {
     if (stage.win()) {
-        console.log("you won");
+        if (levels.indexOf(stage) == levels.length - 1){
+            console.log("you won everything");
+        } else {
+            var n = levels.indexOf(stage) + 1;
+            run_stage(levels[n](), canvas, context, i_context);
+        };
     } else if (stage.lose()) {
-        console.log("you lost");
+        var n = levels.indexOf(stage);
+        run_stage(levels[n](), canvas, context, i_context);
     } else if (moved.length < stage.players.length) {
         var listener = click(function (x, y) {
             var clicked_on = false;
