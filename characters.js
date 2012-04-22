@@ -69,6 +69,17 @@ var _base_character = {
             if (Math.abs(delta_y) <= 1 && Math.abs(delta_x) <= 1) {
                 stage.redraw(context);
                 other.hp -= _this.damage;
+                if (other.hp <= 0) {
+                    // remove the other if it's dead.
+                    var npc_index = stage.npcs.indexOf(other);
+                    var p_index = stage.players.indexOf(other);
+                    if (npc_index > -1) {
+                        stage.npcs.splice(npc_index, 1)
+                    } else if (p_index > -1) {
+                        stage.players.splice(p_index, 1)
+                    };
+                };
+                stage.redraw(context);
                 resume();
             } else {
                 setTimeout(redraw, 40);
