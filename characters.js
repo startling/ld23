@@ -148,6 +148,7 @@ var npc = Character({
 
 var lazy = Character({
     name: "npc", image: "resources/npc.png",
+    max_hp: 14,
     move: function (stage, context, resume) {
         // do nothing.
         resume();
