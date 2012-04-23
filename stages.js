@@ -277,3 +277,14 @@ function fourth () {
         npcs: [npc.at(0, 0)],
     });
 };
+
+function fifth () {
+    return Stage({
+        background: "resources/background_1.png",
+        subtitle: "Cornered",
+        players: [player.at(6, 3)],
+        obstacles: [block.at(4, 4), block.at(3, 2), block.at(4, 2), block.at(4, 3),
+            block.at(3, 4)],
+        npcs: [lazy.at(3, 3)],
+    });
+};

@@ -145,3 +145,11 @@ var npc = Character({
         };
     },
 });
+
+var lazy = Character({
+    name: "npc", image: "resources/npc.png",
+    move: function (stage, context, resume) {
+        // do nothing.
+        resume();
+    },
+});
