@@ -263,7 +263,7 @@ function third () {
 function fourth () { 
     return Stage({
         background: "resources/brown.png",
-        subtitle: "Around the puddle.",
+        subtitle: "Around.",
         players: [player.at(6, 6)],
         obstacles: [puddle.tl.at(1, 1), puddle.left.at(1, 2), puddle.left.at(1, 3),
            puddle.bl.at(1, 4), puddle.inside_bl.at(2, 4), puddle.bl.at(2, 5), puddle.bottom.at(3, 5),
