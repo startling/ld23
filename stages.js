@@ -208,12 +208,6 @@ var _base_stage = {
 };
 
 
-// fill it up with new rows
-for (var num=0; num < 25; num++) {
-    _base_stage[num] = new Row();
-};
-
-
 function Stage (literal) {
     // create a stage with clones of each row of the base stage.
     var stage = Object.create(_base_stage);
@@ -225,10 +219,6 @@ function Stage (literal) {
     var image = new Image();
     image.src = stage.background;
     stage.background = image;
-    // create new rows.
-    for (var num = 0; num < 25; num++){
-        stage[num] = new Row();
-    };
     return stage;
 };
 
@@ -247,10 +237,22 @@ function first(){
     });
 };
 
-function second () { 
+
+function second () {
     return Stage({
         background: "resources/brown.png",
-        subtitle: "Go around the puddle.",
+        subtitle: "A little trickier.",
+        players: [player.at(0, 0), player.at(6, 6)],
+        obstacles: [block.at(0, 2), block.at(2, 0), block.at(1, 2), block.at(5, 4),
+            block.at(4, 6), block.at(6, 4)],
+        npcs: [npc.at(3, 3)],
+    });
+};
+
+function third () { 
+    return Stage({
+        background: "resources/brown.png",
+        subtitle: "Around the puddle.",
         players: [player.at(6, 6)],
         obstacles: [puddle.tl.at(1, 1), puddle.left.at(1, 2), puddle.left.at(1, 3),
            puddle.bl.at(1, 4), puddle.inside_bl.at(2, 4), puddle.bl.at(2, 5), puddle.bottom.at(3, 5),
