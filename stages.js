@@ -249,7 +249,18 @@ function second () {
     });
 };
 
-function third () { 
+function third () {
+    return Stage({
+        background: "resources/background_1.png",
+        subtitle: "Glider",
+        players: [player.at(0, 0), player.at(6, 6)],
+        obstacles: [block.at(2, 2), block.at(3, 2), block.at(4, 2), block.at(4, 3),
+            block.at(3, 4)],
+        npcs: [npc.at(3, 3)],
+    });
+};
+
+function fourth () { 
     return Stage({
         background: "resources/brown.png",
         subtitle: "Around the puddle.",

@@ -12,7 +12,7 @@ highlight.src = "resources/highlight.png"
 
 
 // main list of stages to play.
-var levels = [first, second, third];
+var levels = [first, second, third, fourth];
 var this_stage = 0;
 
 
