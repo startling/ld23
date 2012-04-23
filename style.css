@@ -15,12 +15,10 @@ body {
     /* center the canvas. */
     text-align: center;
     
-    /* 25 tiles wide. */
-    width: 500px;
+    width: 200px;
 }
 
 .container {
-    /* 25 tiles high, with an extra 20px row. */
     min-height: 520px;
 
     background-color: #fff;

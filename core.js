@@ -3,8 +3,8 @@
 // and constants for tile height and width and page height and width (in
 // number of tiles, not pixels).
 var tile_size = 20;
-var page_height = 25;
-var page_width = 25;
+var page_height = 7;
+var page_width = 7;
 
 // the image we use to highlight tiles
 var highlight = new Image();
@@ -12,7 +12,7 @@ highlight.src = "resources/highlight.png"
 
 
 // main list of stages to play.
-var levels = [first, first];
+var levels = [first, second];
 var this_stage = 0;
 
 

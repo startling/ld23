@@ -240,9 +240,27 @@ function Stage (literal) {
 function first(){ 
     return Stage({
         background: "resources/background_1.png",
-        subtitle: "get the firefly.",
-        players: [player.at(3, 3), player.at(7, 7)],
+        subtitle: "Pretty easy.",
+        players: [player.at(3, 3), player.at(4, 4)],
         obstacles: [block.at(1, 1), block.at(1, 2), block.at(1, 3)],
         npcs: [npc.at(5, 5)]
+    });
+};
+
+function second () { 
+    return Stage({
+        background: "resources/brown.png",
+        subtitle: "Go around the puddle.",
+        players: [player.at(6, 6)],
+        obstacles: [puddle.tl.at(1, 1), puddle.left.at(1, 2), puddle.left.at(1, 3),
+           puddle.bl.at(1, 4), puddle.inside_bl.at(2, 4), puddle.bl.at(2, 5), puddle.bottom.at(3, 5),
+           puddle.bottom.at(5, 5), puddle.bottom.at(4, 5), puddle.br.at(6, 5), puddle.right.at(6, 4),
+           puddle.right.at(6, 3), puddle.right.at(6, 2), puddle.tr.at(6, 1), puddle.top.at(5, 1),
+           puddle.top.at(4, 1), puddle.top.at(3, 1), puddle.top.at(2, 1), puddle.middle.at(2, 2),
+           puddle.middle.at(3, 2), puddle.middle.at(4, 2), puddle.middle.at(5, 2),
+           puddle.middle.at(2, 3), puddle.middle.at(3, 3), puddle.middle.at(3, 4),
+           puddle.middle.at(4, 4), puddle.middle.at(5, 4), puddle.middle.at(4, 3),
+           puddle.middle.at(5, 3)],
+        npcs: [npc.at(0, 0)],
     });
 };

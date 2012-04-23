@@ -113,10 +113,8 @@ var player = Character({
 
 
 var block = Character({
-    name: "a block", image: "resources/firefly.png",
+    name: "a block", image: "resources/block.png",
 });
-
-var rock_1 = Character({image: "resources/rock_1.png"});
 
 
 var puddle = {
