@@ -39,6 +39,7 @@ window.addEventListener('load', function () {
 
 function run_stage (stage, canvas, context, i_context) {
     stage.redraw(context);
+    stage.redraw(context);
     turn(stage, canvas, context, i_context, []);
 };
 
