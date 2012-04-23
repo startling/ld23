@@ -288,3 +288,16 @@ function fifth () {
         npcs: [lazy.at(3, 3)],
     });
 };
+
+function sixth () {
+    return Stage({
+        background: "resources/brown.png",
+        subtitle: "Sympleglades",
+        players: [player.at(3, 0), player.at(3, 6)],
+        obstacles: [block.at(5, 4), block.at(5, 2), block.at(4, 2), block.at(5, 3),
+            block.at(4, 4), block.at(1, 2), block.at(2, 2), block.at(2, 4), block.at(1, 4),
+           block.at(1, 3)],
+        npcs: [lazy.at(4, 3), lazy.at(2, 3)],
+    });
+
+}
