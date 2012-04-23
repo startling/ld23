@@ -142,7 +142,9 @@ var npc = Character({
             var index = Math.floor(Math.random() * possible.length)
             var tile = possible[index];
             stage.move(this, tile.x, tile.y, context, resume);
-        };
+        } else {
+            resume();
+        }
     },
 });
 
