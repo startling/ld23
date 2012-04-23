@@ -137,9 +137,11 @@ var npc = Character({
         // gets called whenever an npc has a chance to move.
         // list of all the possible places to go.
         var possible = stage.possible(this);
-        // find a random tile to go to.
-        var index = Math.floor(Math.random() * possible.length)
-        var tile = possible[index];
-        stage.move(this, tile.x, tile.y, context, resume);
+        if (possible.length > 0) {
+            // find a random tile to go to.
+            var index = Math.floor(Math.random() * possible.length)
+            var tile = possible[index];
+            stage.move(this, tile.x, tile.y, context, resume);
+        };
     },
 });
